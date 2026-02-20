@@ -17,23 +17,7 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json());
-
-// enable CORS for all origins.  in production you may wish to lock
-// this down to a specific list of frontend URLs, but for now the
-// requirement is to accept requests from anywhere.  credentials are
-// still permitted in case the client sends custom headers/tokens.
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
-
-// in case some platform rewrites paths with extra slashes, normalise them
-app.use((req, res, next) => {
-  req.url = req.url.replace(/\/\/+/g, "/");
-  next();
-});
+app.use(cors());
 
 // api endpoints
 app.use("/api/user", userRouter);
