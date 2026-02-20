@@ -8,7 +8,8 @@ const List = () => {
   const [list, setList] = useState([])
   const fetchList = async()=>{
     try{
-      const response = await axios.get(backendUrl + 'api/product/list')
+      // backendUrl is already guaranteed to not have a trailing slash
+      const response = await axios.get(backendUrl + '/api/product/list')
       if(response.data.success){
         setList(response.data.products)
       }
