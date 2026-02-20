@@ -16,13 +16,19 @@ connectDB();
 connectCloudinary();
 
 // middlewares
-app.use(express.json());
-app.use(cors({
-  origin: ['https://e-commerce-1u7s.vercel.app'],  // your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true  // only if you're using cookies/auth headers
-}));
+app.use(express());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
+// in case some platform rewrites paths with extra slashes, normalise them
+app.use((req, res, next) => {
+  req.url = req.url.replace(/\/\/+/g, "/");
+  next();
+});
 
 // api endpoints
 app.use("/api/user", userRouter);
