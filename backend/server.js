@@ -17,18 +17,7 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
-
-// in case some platform rewrites paths with extra slashes, normalise them
-app.use((req, res, next) => {
-  req.url = req.url.replace(/\/\/+/g, "/");
-  next();
-});
+app.use(cors());
 
 // api endpoints
 app.use("/api/user", userRouter);
