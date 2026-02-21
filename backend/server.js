@@ -17,7 +17,27 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json());
-app.use(cors({ origin: "*"}));
+
+// CORS configuration with whitelist
+const allowedOrigins = [
+  "https://e-commerce-front-ivory.vercel.app",
+  "https://e-commerce-admin-five-beryl.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "token"],
+  credentials: true
+}));
+
+app.options("*", cors());
 
 // api endpoints
 app.use("/api/user", userRouter);
