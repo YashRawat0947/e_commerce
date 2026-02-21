@@ -21,7 +21,7 @@ app.use(express.json());
 // CORS configuration with whitelist
 const allowedOrigins = [
   "https://e-commerce-front-ivory.vercel.app",
-  "https://e-commerce-admin-five-beryl.vercel.app"
+  "https://e-commerce-admin-e23gel37p-yashrawat0947s-projects.vercel.app/"
 ];
 
 app.use(cors({
